@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_title">Compléter le profil élève</string>
+    <string name="profile_subtitle">Saisissez vos informations pour demander votre inscription.</string>
+    <string name="profile_camera">Caméra</string>
+    <string name="profile_album">Galerie</string>
+    <string name="profile_initials">Initiales</string>
+    <string name="profile_full_name">Nom complet</string>
+    <string name="profile_level">Niveau scolaire</string>
+    <string name="profile_class">Classe</string>
+    <string name="profile_number">N° de classe</string>
+    <string name="profile_massar">Code Massar</string>
+    <string name="profile_hint">Choisissez la classe de votre niveau.</string>
+    <string name="profile_submit">Envoyer la demande</string>
+    <string name="profile_note">Votre compte sera activé après validation administrative.</string>
+    <string name="profile_logout">Changer de compte / Déconnexion</string>
+    <string name="profile_name_error">Saisissez votre nom complet.</string>
+    <string name="profile_level_error">Choisissez un niveau.</string>
+    <string name="profile_class_error">Choisissez une classe valide pour ce niveau.</string>
+    <string name="profile_number_error">Saisissez un numéro entier supérieur à zéro.</string>
+    <string name="profile_massar_error">Une lettre suivie de neuf chiffres, par exemple D155343657.</string>
+    <string name="profile_empty_classes">Aucune classe disponible pour ce niveau.</string>
+    <string name="profile_catalog_setup">Le catalogue des classes doit être configuré.</string>
+    <string name="profile_network_error">Service indisponible. Vérifiez la connexion et les autorisations, puis réessayez.</string>
+    <string name="profile_photo_error">Impossible de lire cette image. Choisissez-en une autre.</string>
+    <string name="profile_camera_error">Caméra indisponible. Utilisez la galerie.</string>
+    <string name="profile_photo_setup">Envoi des photos non configuré. Vous pouvez utiliser les initiales.</string>
+    <string name="profile_upload_error">Échec de l’envoi de la photo. Réessayez.</string>
+    <string name="profile_login_error">Connexion impossible. Réessayez avec Google.</string>
+    <string name="profile_retry">Réessayer</string>
+    <string name="profile_loading">Chargement…</string>
+    <string name="profile_pending_title">Demande en cours de vérification</string>
+    <string name="profile_pending_body">Votre demande a été reçue. Attendez la validation administrative.</string>
+    <string name="profile_rejected_title">Demande non approuvée</string>
+    <string name="profile_rejected_body">Contactez l’administration pour vérifier vos informations.</string>
+    <string name="profile_already_submitted">Une demande existe déjà. Actualisez son état.</string>
+    <string name="profile_refresh">Actualiser la demande</string>
+    <string name="profile_error_title">Vérification du compte impossible</string>
+    <string name="profile_choose_level">Choisissez d’abord un niveau.</string>
+    <string name="profile_switch">Changer de compte</string>
+    <string name="profile_signout">Déconnexion</string>
+    <string name="profile_cancel">Annuler</string>
+    <string name="profile_photo_preview">Aperçu de la photo</string>
+</resources>

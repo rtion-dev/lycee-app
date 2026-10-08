@@ -3,7 +3,7 @@
 ![Lycée App — a closer connection to school](docs/assets/hero-en.svg)
 
 <p align="center"><strong>English</strong> · <a href="README.ar.md">العربية</a></p>
-<p align="center"><a href="#-quick-start">Quick start</a> &nbsp;·&nbsp; <a href="#-inside-the-project">Project map</a> &nbsp;·&nbsp; <a href="#-documentation">Documentation</a></p>
+<p align="center"><a href="#-quick-start">Quick start</a> &nbsp;·&nbsp; <a href="#️-inside-the-project">Project map</a> &nbsp;·&nbsp; <a href="#-documentation">Documentation</a></p>
 
 <p align="center"><strong>One school. Two interfaces. A connected experience.</strong><br>Android for students. A web workspace for administration.<br>Made for Abdallah Guennoun High School, El Qliâa.</p>
 

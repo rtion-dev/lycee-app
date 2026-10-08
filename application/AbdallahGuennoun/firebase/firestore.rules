@@ -1,0 +1,187 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function owner(uid) { return signedIn() && request.auth.uid == uid; }
+    function reviewer() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/roles/$(request.auth.uid))
+        && get(/databases/$(database)/documents/roles/$(request.auth.uid)).data.active == true
+        && get(/databases/$(database)/documents/roles/$(request.auth.uid)).data.role in ['director', 'admin'];
+    }
+    function ownPhoto(url, uid) {
+      let base = get(/databases/$(database)/documents/schoolConfig/media).data.uploadBaseUrl;
+      let parts = url.split('/');
+      return url is string && url.size() <= 2048 && parts.size() == 7
+        && parts[0] == 'https:' && parts[1] == ''
+        && parts[2] == base.split('/')[2]
+        && parts[3] == 'avatar' && parts[4] == uid
+        && parts[5].matches('^[a-f0-9-]{36}$')
+        && parts[6] in ['jpg','jpeg','png','webp'];
+    }
+    function permittedFields() {
+      return ['uid', 'fullName', 'levelId', 'classId', 'className', 'academicYear',
+              'ordinalNumber', 'massarId', 'avatarType', 'photoUrl', 'status', 'createdAt', 'updatedAt'];
+    }
+    function validApplication(uid) {
+      let d = request.resource.data;
+      let c = get(/databases/$(database)/documents/classes/$(d.classId)).data;
+      let catalog = get(/databases/$(database)/documents/schoolConfig/catalog).data;
+      return d.uid == uid
+        && d.fullName is string && d.fullName.size() > 0 && d.fullName.size() <= 160
+        && d.levelId in ['TC', '1BAC', '2BAC']
+        && d.classId is string && c.active == true
+        && c.levelId == d.levelId && c.name == d.className
+        && c.academicYear == catalog.academicYear && d.academicYear == catalog.academicYear
+        && d.ordinalNumber is int && d.ordinalNumber > 0
+        && d.massarId is string && d.massarId.matches('^[A-Z][0-9]{9}$')
+        && d.status == 'pending'
+        && d.updatedAt == request.time && d.createdAt is timestamp
+        && ((d.avatarType == 'initials' && !('photoUrl' in d))
+          || (d.avatarType == 'photo' && d.photoUrl is string
+            && ownPhoto(d.photoUrl, uid)));
+    }
+    match /roles/{uid} {
+      allow read: if owner(uid);
+      // Set role documents only through a trusted administrative process/Console.
+      allow write: if false;
+    }
+    match /schoolConfig/{id} {
+      allow read: if signedIn();
+      allow write: if reviewer();
+    }
+    match /classes/{id} {
+      allow read: if signedIn();
+      allow write: if reviewer();
+    }
+    match /users/{uid} {
+      allow read: if owner(uid) || reviewer();
+      allow create: if owner(uid) && request.resource.data.keys().hasOnly(permittedFields())
+        && validApplication(uid) && request.resource.data.createdAt == request.time;
+      // Legacy profiles without status must be resubmitted for review, never auto-approved.
+      allow update: if owner(uid) && resource.data.get('status', 'draft') == 'draft'
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(permittedFields())
+        && validApplication(uid)
+        && (('createdAt' in resource.data && request.resource.data.createdAt == resource.data.createdAt)
+          || (!('createdAt' in resource.data) && request.resource.data.createdAt == request.time));
+      // Reviewers can change status only; they cannot promote roles here.
+      allow update: if reviewer()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'reviewedAt'])
+        && request.resource.data.status in ['approved', 'rejected', 'draft']
+        && request.resource.data.reviewedAt == request.time;
+      // Updating a photo never changes the student's role, class or approval status.
+      allow update: if owner(uid)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['avatarType','photoUrl','updatedAt'])
+        && request.resource.data.avatarType == 'photo'
+        && request.resource.data.photoUrl is string
+        && ownPhoto(request.resource.data.photoUrl, uid)
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if false;
+    }
+    match /news/{id} {
+      allow read: if reviewer() || (signedIn() && resource.data.status == 'published');
+      allow write: if reviewer();
+    }
+    match /guidance/{id} {
+      allow read: if reviewer() || (signedIn() && resource.data.status == 'published');
+      allow write: if reviewer();
+    }
+    match /timetables/{id} {
+      allow read: if reviewer() || (signedIn() && resource.data.status == 'published');
+      allow write: if reviewer();
+    }
+
+
+    function director() {
+      return signedIn() && exists(/databases/$(database)/documents/roles/$(request.auth.uid)) && get(/databases/$(database)/documents/roles/$(request.auth.uid)).data.active == true
+        && get(/databases/$(database)/documents/roles/$(request.auth.uid)).data.role == 'director';
+    }
+    function documentWorker() {
+      return director() || (signedIn() && exists(/databases/$(database)/documents/documentStaff/$(request.auth.uid)) && get(/databases/$(database)/documents/documentStaff/$(request.auth.uid)).data.active == true);
+    }
+    function approvedStudent() {
+      return signedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.status == 'approved';
+    }
+    function documentFields() { return ['nameAr','nameLatin','birthDate','massarId','classId','ordinalNumber']; }
+    function textAnswer(a,k,max) { return !(k in a) || (a[k] is string && a[k].size() > 0 && a[k].size() <= max); }
+    function validAnswers(a) {
+      return a is map && a.keys().hasOnly(documentFields())
+        && textAnswer(a,'nameAr',160) && textAnswer(a,'nameLatin',160)
+        && (!('birthDate' in a) || (a.birthDate is string && a.birthDate.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')))
+        && (!('massarId' in a) || (a.massarId is string && a.massarId.matches('^[A-Z][0-9]{9}$')))
+        && (!('ordinalNumber' in a) || (a.ordinalNumber is int && a.ordinalNumber > 0 && a.ordinalNumber <= 999))
+        && (!('classId' in a) || (a.classId is string && a.classId.size() <= 128
+          && get(/databases/$(database)/documents/classes/$(a.classId)).data.active == true
+          && get(/databases/$(database)/documents/classes/$(a.classId)).data.academicYear == get(/databases/$(database)/documents/schoolConfig/catalog).data.academicYear));
+    }
+    function validRequestType(d) {
+      let t = get(/databases/$(database)/documents/documentTypes/$(d.typeId)).data;
+      return t.active == true && d.typeName == t.name && d.fields == t.fields
+        && d.answers.keys().hasAll(t.fields) && d.answers.keys().hasOnly(t.fields) && validAnswers(d.answers);
+    }
+    function validTransition(before,after) {
+      return (before == 'submitted' && after in ['preparing','rejected'])
+        || (before == 'preparing' && after in ['ready','rejected'])
+        || (before == 'ready' && after == 'delivered');
+    }
+    function matchingEvent(id,d) {
+      let e = getAfter(/databases/$(database)/documents/documentRequests/$(id)/events/$(d.lastEventId)).data;
+      return e.actorUid == request.auth.uid && e.at == request.time && e.to == d.status
+        && e.revision == d.revision && e.note == d.note;
+    }
+    match /documentStaff/{uid} {
+      allow read: if owner(uid) || director();
+      allow create, update: if director() && request.resource.data.keys().hasOnly(['active','label','updatedAt','updatedBy'])
+        && request.resource.data.active is bool && request.resource.data.label is string && request.resource.data.label.size() <= 160
+        && request.resource.data.updatedBy == request.auth.uid && request.resource.data.updatedAt == request.time;
+      allow delete: if false;
+    }
+    match /documentTypes/{id} {
+      allow read: if signedIn();
+      allow create, update: if director() && request.resource.data.keys().hasOnly(['name','active','fields','updatedAt','updatedBy'])
+        && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 120
+        && request.resource.data.active is bool && request.resource.data.fields is list
+        && request.resource.data.fields.size() > 0 && request.resource.data.fields.size() <= 6
+        && request.resource.data.fields.toSet().size() == request.resource.data.fields.size()
+        && request.resource.data.fields.hasOnly(documentFields())
+        && request.resource.data.updatedAt == request.time && request.resource.data.updatedBy == request.auth.uid;
+      allow delete: if false;
+    }
+    match /documentRequests/{id} {
+      allow read: if owner(resource.data.uid) || documentWorker();
+      allow get: if approvedStudent() && !exists(/databases/$(database)/documents/documentRequests/$(id));
+      allow create: if approvedStudent()
+        && request.resource.data.keys().hasOnly(['uid','typeId','typeName','fields','answers','status','note','revision','lastEventId','createdAt','updatedAt'])
+        && request.resource.data.uid == request.auth.uid && request.resource.data.status == 'submitted'
+        && request.resource.data.typeId is string && request.resource.data.typeId.size() <= 128
+        && request.resource.data.note == '' && request.resource.data.revision == 1
+        && request.resource.data.createdAt == request.time && request.resource.data.updatedAt == request.time
+        && validRequestType(request.resource.data) && matchingEvent(id,request.resource.data);
+      allow update: if documentWorker()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','note','revision','lastEventId','updatedAt'])
+        && validTransition(resource.data.status,request.resource.data.status)
+        && request.resource.data.revision == resource.data.revision + 1
+        && request.resource.data.note is string && request.resource.data.note.size() <= 500
+        && (request.resource.data.status != 'rejected' || request.resource.data.note.size() > 0)
+        && request.resource.data.updatedAt == request.time && matchingEvent(id,request.resource.data);
+      allow delete: if false;
+      match /events/{eventId} {
+        allow read: if documentWorker() || owner(get(/databases/$(database)/documents/documentRequests/$(id)).data.uid);
+        allow create: if signedIn()
+          && request.resource.data.keys().hasOnly(['actorUid','at','from','to','note','revision'])
+          && request.resource.data.actorUid == request.auth.uid && request.resource.data.at == request.time
+          && getAfter(/databases/$(database)/documents/documentRequests/$(id)).data.lastEventId == eventId
+          && matchingEvent(id,getAfter(/databases/$(database)/documents/documentRequests/$(id)).data)
+          && ((!exists(/databases/$(database)/documents/documentRequests/$(id))
+                && approvedStudent() && getAfter(/databases/$(database)/documents/documentRequests/$(id)).data.uid == request.auth.uid
+                && request.resource.data.from == '' && request.resource.data.to == 'submitted' && request.resource.data.revision == 1)
+            || (documentWorker() && request.resource.data.from == get(/databases/$(database)/documents/documentRequests/$(id)).data.status
+                && request.resource.data.revision == get(/databases/$(database)/documents/documentRequests/$(id)).data.revision + 1
+                && validTransition(request.resource.data.from,request.resource.data.to)));
+        allow update, delete: if false;
+      }
+    }
+
+    match /{document=**} { allow read, write: if false; }
+  }
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_title">إكمال ملف التلميذ</string>
+    <string name="profile_subtitle">يرجى إدخال بياناتك لإرسال طلب التسجيل.</string>
+    <string name="profile_camera">الكاميرا</string>
+    <string name="profile_album">الألبوم</string>
+    <string name="profile_initials">الأحرف الأولى</string>
+    <string name="profile_full_name">الاسم الكامل</string>
+    <string name="profile_level">المستوى الدراسي</string>
+    <string name="profile_class">القسم</string>
+    <string name="profile_number">الرقم الترتيبي</string>
+    <string name="profile_massar">رقم مسار</string>
+    <string name="profile_hint">اختر القسم حسب المستوى.</string>
+    <string name="profile_submit">إرسال طلب التسجيل</string>
+    <string name="profile_note">سيتم تفعيل حسابك بعد مراجعة الإدارة.</string>
+    <string name="profile_logout">تبديل الحساب / تسجيل الخروج</string>
+    <string name="profile_name_error">أدخل الاسم الكامل.</string>
+    <string name="profile_level_error">اختر المستوى الدراسي.</string>
+    <string name="profile_class_error">اختر قسماً صالحاً لهذا المستوى.</string>
+    <string name="profile_number_error">أدخل رقماً ترتيبياً صحيحاً أكبر من صفر.</string>
+    <string name="profile_massar_error">أدخل حرفاً لاتينياً متبوعاً بتسعة أرقام، مثل D155343657.</string>
+    <string name="profile_empty_classes">لم تضف الإدارة أقساماً لهذا المستوى بعد.</string>
+    <string name="profile_catalog_setup">لائحة الأقسام لم تتم تهيئتها بعد.</string>
+    <string name="profile_network_error">تعذر الاتصال بالخدمة. تحقق من الإنترنت والصلاحيات ثم أعد المحاولة.</string>
+    <string name="profile_photo_error">تعذر قراءة الصورة. اختر صورة أخرى.</string>
+    <string name="profile_camera_error">تعذر فتح الكاميرا. يمكنك اختيار صورة من الألبوم.</string>
+    <string name="profile_photo_setup">رفع الصور غير مهيأ بعد. يمكنك التسجيل بالأحرف الأولى.</string>
+    <string name="profile_upload_error">فشل رفع الصورة. أعد المحاولة.</string>
+    <string name="profile_login_error">تعذر تسجيل الدخول. أعد المحاولة بحساب Google.</string>
+    <string name="profile_retry">إعادة المحاولة</string>
+    <string name="profile_loading">جارٍ التحميل…</string>
+    <string name="profile_pending_title">طلبك قيد المراجعة</string>
+    <string name="profile_pending_body">توصلنا بطلبك. انتظر موافقة الإدارة لتفعيل حسابك.</string>
+    <string name="profile_rejected_title">لم تتم الموافقة على الطلب</string>
+    <string name="profile_rejected_body">تواصل مع الإدارة لمراجعة بياناتك.</string>
+    <string name="profile_already_submitted">هذا الحساب لديه طلب مسجل. حدّث حالة الحساب.</string>
+    <string name="profile_refresh">تحديث حالة الطلب</string>
+    <string name="profile_error_title">تعذر التحقق من الحساب</string>
+    <string name="profile_choose_level">اختر المستوى أولاً.</string>
+    <string name="profile_switch">تبديل الحساب</string>
+    <string name="profile_signout">تسجيل الخروج</string>
+    <string name="profile_cancel">إلغاء</string>
+    <string name="profile_photo_preview">معاينة صورة البروفايل</string>
+</resources>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1045505850218",
+    "project_id": "rtion-app",
+    "storage_bucket": "rtion-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045505850218:android:c22f10fe462619d99ec313",
+        "android_client_info": {
+          "package_name": "com.otmanelabouze.abdallahguennoun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1045505850218-3svrr5uleuad8db2g9r08lr82mooj1gj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.otmanelabouze.abdallahguennoun",
+            "certificate_hash": "dd35f17f5bf056d34dd6db8557ac8df738e435d5"
+          }
+        },
+        {
+          "client_id": "1045505850218-o5b9l1q4rjpgsf3km55p3n1uam5mft7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEh5tVm6yU9BHUzkaPqkmbUk9yrOfYVf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1045505850218-o5b9l1q4rjpgsf3km55p3n1uam5mft7e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

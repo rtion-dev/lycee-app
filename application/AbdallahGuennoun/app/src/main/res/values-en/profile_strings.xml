@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_title">Complete student profile</string>
+    <string name="profile_subtitle">Enter your details to submit your application.</string>
+    <string name="profile_camera">Camera</string>
+    <string name="profile_album">Gallery</string>
+    <string name="profile_initials">Initials</string>
+    <string name="profile_full_name">Full name</string>
+    <string name="profile_level">Academic level</string>
+    <string name="profile_class">Class</string>
+    <string name="profile_number">Class number</string>
+    <string name="profile_massar">Massar ID</string>
+    <string name="profile_hint">Choose a class for your level.</string>
+    <string name="profile_submit">Submit application</string>
+    <string name="profile_note">Your account will be activated after administrative review.</string>
+    <string name="profile_logout">Switch account / Sign out</string>
+    <string name="profile_name_error">Enter your full name.</string>
+    <string name="profile_level_error">Choose an academic level.</string>
+    <string name="profile_class_error">Choose a valid class for this level.</string>
+    <string name="profile_number_error">Enter a whole number greater than zero.</string>
+    <string name="profile_massar_error">Use one Latin letter and nine digits, e.g. D155343657.</string>
+    <string name="profile_empty_classes">No classes are available for this level yet.</string>
+    <string name="profile_catalog_setup">The class catalog has not been configured yet.</string>
+    <string name="profile_network_error">Cannot reach the service. Check connectivity and permissions, then retry.</string>
+    <string name="profile_photo_error">Cannot read the image. Choose another one.</string>
+    <string name="profile_camera_error">Camera unavailable. Try the gallery.</string>
+    <string name="profile_photo_setup">Photo upload is not configured yet. You can register using initials.</string>
+    <string name="profile_upload_error">Photo upload failed. Please retry.</string>
+    <string name="profile_login_error">Sign-in failed. Retry with Google.</string>
+    <string name="profile_retry">Retry</string>
+    <string name="profile_loading">Loading…</string>
+    <string name="profile_pending_title">Application under review</string>
+    <string name="profile_pending_body">Your application was received. Please wait for administrative approval.</string>
+    <string name="profile_rejected_title">Application not approved</string>
+    <string name="profile_rejected_body">Contact the administration to review your details.</string>
+    <string name="profile_already_submitted">An application already exists. Refresh your account status.</string>
+    <string name="profile_refresh">Refresh application status</string>
+    <string name="profile_error_title">Could not check account status</string>
+    <string name="profile_choose_level">Choose a level first.</string>
+    <string name="profile_switch">Switch account</string>
+    <string name="profile_signout">Sign out</string>
+    <string name="profile_cancel">Cancel</string>
+    <string name="profile_photo_preview">Profile photo preview</string>
+</resources>

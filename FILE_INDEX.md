@@ -6,7 +6,7 @@
 |---|---|
 | [.gitignore](.gitignore) | استثناء الكاش والمخرجات والإعدادات المحلية من Git. |
 | [FILE_INDEX.md](FILE_INDEX.md) | الفهرس الكامل لمسارات الملفات ودور كل ملف. |
-| [README.md](README.md) | التقديم الرئيسي وروابط الأدلة وطريقة البدء. |
+| [README.md](README.md) | التقديم الإنجليزي الرئيسي وروابط الأدلة وطريقة البدء. |
 | [administration/Admin-Site-Web/.firebaserc](administration/Admin-Site-Web/.firebaserc) | ربط Firebase Hosting بالمشروع الحالي. |
 | [administration/Admin-Site-Web/firebase.json](administration/Admin-Site-Web/firebase.json) | إعداد Hosting ومجلد public ورؤوس HTTP. |
 | [administration/Admin-Site-Web/public/admin-navigation.css](administration/Admin-Site-Web/public/admin-navigation.css) | أساس تنسيق تنقل الإدارة. |
@@ -147,3 +147,7 @@
 | [docs/EXTERNAL-SERVICES.md](docs/EXTERNAL-SERVICES.md) | الخدمات غير المرفقة والاعتماديات الخارجية. |
 | [docs/SETUP.md](docs/SETUP.md) | متطلبات وأوامر الإعداد والبناء والاختبار والنشر. |
 | [docs/VERIFICATION.md](docs/VERIFICATION.md) | نطاق التحقق وحدوده لهذه النسخة. |
+| [README.ar.md](README.ar.md) | النسخة العربية من تقديم المشروع ودليل البداية. |
+| [docs/assets/hero-en.svg](docs/assets/hero-en.svg) | بانر المقدمة الإنجليزية، برسم توضيحي للتطبيق والإدارة. |
+| [docs/assets/hero-ar.svg](docs/assets/hero-ar.svg) | بانر المقدمة العربية، برسم توضيحي للتطبيق والإدارة. |
+| [docs/assets/stack.svg](docs/assets/stack.svg) | شريط ملون يعرّف بتقنيات المشروع. |

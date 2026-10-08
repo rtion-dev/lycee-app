@@ -1,95 +1,167 @@
-# ثانوية عبد الله كنون — التطبيق وموقع الإدارة
+<p align="center"><img src="administration/Admin-Site-Web/public/logo_dark.png" width="108" alt="Abdallah Guennoun High School emblem"></p>
 
-تطبيق Android للتلاميذ وموقع ويب للإدارة، مرتبطان بخدمات Firebase لتسجيل الدخول والبيانات والإشعارات.
+![Lycée App — a closer connection to school](docs/assets/hero-en.svg)
 
-**المطور:** RTION — Otman Elabouze · **إصدار التطبيق في المصدر:** 2.0 (6)
+<p align="center"><strong>English</strong> · <a href="README.ar.md">العربية</a></p>
+<p align="center"><a href="#-quick-start">Quick start</a> &nbsp;·&nbsp; <a href="#-inside-the-project">Project map</a> &nbsp;·&nbsp; <a href="#-documentation">Documentation</a></p>
 
-## مكونات المشروع
+<p align="center"><strong>One school. Two interfaces. A connected experience.</strong><br>Android for students. A web workspace for administration.<br>Made for Abdallah Guennoun High School, El Qliâa.</p>
 
-| الجزء | الوظيفة | التقنيات |
-|---|---|---|
-| [تطبيق Android](application/AbdallahGuennoun/) | حساب التلميذ، الأخبار، التوجيه، استعمال الزمن وطلب الوثائق | Kotlin، Jetpack Compose، XML |
-| [موقع الإدارة](administration/Admin-Site-Web/) | مراجعة التسجيلات، إدارة الأقسام والمحتوى والوثائق | HTML، CSS، JavaScript |
-| [خدمات Firebase](application/AbdallahGuennoun/firebase/) | قواعد البيانات والصلاحيات ووظائف إرسال الإشعارات | Firestore Rules، JavaScript، Node.js |
+---
 
-## تقسيم الملفات
+## ✨ School life, brought together
 
-~~~text
-GitHub/
+| 🎓 For students | 🖥️ For administration | ☁️ Behind the experience |
+| :--- | :--- | :--- |
+| Sign in and manage a student profile | Review student registrations | Firebase Authentication |
+| Follow school news and guidance | Publish news and guidance | Firestore data and access rules |
+| View class timetables | Organize classes and timetables | Firebase Hosting for the web portal |
+| Request documents and track progress | Process and track document requests | FCM notification function source |
+
+The Android app and administration website share Firebase services. The app also opens educational websites through Android System WebView. Media uploads use a separate external service.
+
+## 🧩 Built with
+
+![Kotlin · Jetpack Compose · Firebase · JavaScript · Node.js](docs/assets/stack.svg)
+
+| Layer | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Mobile** | Kotlin · Jetpack Compose · Android XML | Student screens, app behavior and resources |
+| **Web** | HTML · CSS · JavaScript | A static administration website |
+| **Services** | Firebase Auth · Firestore · FCM | Identity, data access and notifications |
+| **Server functions** | JavaScript · Node.js 22 | Publication notification handling |
+| **Build** | Gradle · Android Gradle Plugin | Android builds and dependency management |
+
+## 🗂️ Inside the project
+
+```text
+lycee-app/
 ├── application/
-│   └── AbdallahGuennoun/
-│       ├── app/                 كود Android والواجهات والصور
-│       ├── firebase/            القواعد والفهارس والوظائف والاختبارات
-│       ├── gradle/              إعدادات المكتبات وGradle Wrapper
-│       ├── gradlew / gradlew.bat
-│       └── ملفات إعداد البناء
+│   └── AbdallahGuennoun/       Android Studio project
+│       ├── app/               Kotlin source, resources and tests
+│       ├── firebase/          Rules, indexes, functions and tests
+│       └── gradle/            Wrapper and dependency versions
 ├── administration/
-│   └── Admin-Site-Web/
-│       ├── public/              صفحات الإدارة والسكربتات والتصميم
-│       ├── firebase.json        إعداد Firebase Hosting
-│       └── .firebaserc          ربط مشروع Firebase
-├── docs/
-├── README.md
-├── FILE_INDEX.md
-└── .gitignore
-~~~
+│   └── Admin-Site-Web/         Administration website
+│       ├── public/            HTML, CSS, JavaScript and images
+│       └── firebase.json      Hosting configuration
+├── docs/                      Guides and README artwork
+├── README.md                  English introduction
+├── README.ar.md               المقدمة بالعربية
+├── FILE_INDEX.md              Complete file-by-file index
+└── .gitignore                 Local and generated file exclusions
+```
 
-تم الاحتفاظ ببنية مشروع Android الداخلية، وتغيير اسم مجلد موقع الإدارة في هذه النسخة فقط. ملفات التطبيق والموقع المنسوخة مطابقة للأصل دون تعديل محتواها.
+<details>
+<summary><strong>Where should I start reading the code?</strong></summary>
 
-## كيف يعمل؟
+| What you want to understand | Start here |
+| :--- | :--- |
+| App entry point | [MainActivity.kt](application/AbdallahGuennoun/app/src/main/java/com/otmanelabouze/abdallahguennoun/MainActivity.kt) |
+| Sign-in and account checks | [AuthManager.kt](application/AbdallahGuennoun/app/src/main/java/com/otmanelabouze/abdallahguennoun/AuthManager.kt) |
+| Student home and navigation | [StudentPortal.kt](application/AbdallahGuennoun/app/src/main/java/com/otmanelabouze/abdallahguennoun/StudentPortal.kt) |
+| Document requests | [DocumentRequests.kt](application/AbdallahGuennoun/app/src/main/java/com/otmanelabouze/abdallahguennoun/DocumentRequests.kt) |
+| Administration entry point | [index.html](administration/Admin-Site-Web/public/index.html) and [app.js](administration/Admin-Site-Web/public/app.js) |
+| Data permissions | [firestore.rules](application/AbdallahGuennoun/firebase/firestore.rules) |
+| Notification delivery logic | [functions/](application/AbdallahGuennoun/firebase/functions/) |
 
-1. يسجل التلميذ الدخول بحساب Google عبر Firebase Authentication ويكمل معلوماته.
-2. تراجع الإدارة التسجيل وتدير الأقسام والمحتوى والطلبات من موقع الويب.
-3. يقرأ التطبيق البيانات من Firestore حسب صلاحيات الحساب وقواعد الوصول.
-4. يرسل التلميذ طلب الوثيقة ويتابع حالته، ثم يستلم الوثيقة من المؤسسة.
-5. وظائف الخادم الموجودة في المصدر ترسل تنبيهات FCM عند نشر المحتوى، بعد إعدادها ونشرها.
+</details>
 
-التطبيق وموقع الإدارة يتصلان بخدمات Firebase؛ الموقع ليس خادماً محلياً يجب تشغيله على هاتف التلميذ. رفع الصور يعتمد أيضاً على خدمة خارجية غير مرفقة.
+## 🔄 How it connects
 
-## البدء
+```mermaid
+flowchart LR
+    S["🎓 Student · Android"] --> A["🔐 Firebase Authentication"]
+    W["🖥️ Administration · Web"] --> A
+    S <--> D[("☁️ Firestore")]
+    W <--> D
+    D --> F["⚡ Cloud Functions"]
+    F --> P["🔔 FCM"]
+    P --> S
+    S --> M["🖼️ External media service"]
+    W --> M
+    classDef client fill:#163751,stroke:#72c7ee,color:#edf8ff
+    classDef service fill:#302b42,stroke:#ba9cf0,color:#f5efff
+    classDef external fill:#3b3324,stroke:#d4b679,color:#fff6df
+    class S,W client
+    class A,D,F,P service
+    class M external
+```
 
-### التطبيق
+**A typical document request:** a student submits a request → staff process it → the student follows its status → the document is collected at school. This is separate from timetable PDFs.
 
-افتح المجلد التالي في Android Studio:
+> **Deployment note:** the diagram describes the source architecture. Push notifications require deployed functions and a configured Firebase project. The external media server is not included in this repository.
 
-~~~text
-application/AbdallahGuennoun
-~~~
+## 🚀 Quick start
 
-دع Android Studio يحدد مسار Android SDK وينزّل التبعيات. ثم من جذر المستودع في PowerShell:
+### 01 · Android app
 
-~~~powershell
+Open **application/AbdallahGuennoun** in Android Studio. Install the SDK and Java toolchain specified by the project, let Gradle download dependencies, and configure the local SDK path.
+
+From the repository root, in PowerShell:
+
+```powershell
 cd application/AbdallahGuennoun
 .\gradlew.bat :app:assembleDebug :app:testDebugUnitTest --console=plain
-~~~
+```
 
-راجع [دليل الإعداد](docs/SETUP.md) للإصدارات المحددة وإعداد Firebase. نواتج APK تظهر داخل app/build/outputs/apk. ملف APK المحفوظ من المشروع الأصلي موزع منفصلاً عن مجلد المصدر.
+| Source configuration | Value |
+| :--- | :--- |
+| App version | **2.0** · versionCode **6** |
+| Android | minSdk **26** · targetSdk **37** · compileSdk **37 / minor 1** |
+| Architecture | **arm64-v8a** |
+| Toolchain | Gradle **9.7.1** · AGP **9.4.1** · Kotlin **2.4.10** |
+| Java | Gradle daemon **25** · source/target **17** |
 
-### موقع الإدارة
+On macOS/Linux, run `chmod +x gradlew` and use `./gradlew`. APK build outputs are generated under `app/build/outputs/apk/`. Distribution builds require the owner's signing configuration.
 
-من جذر المستودع، إذا كان Python مثبتاً:
+### 02 · Administration website
 
-~~~powershell
+From the repository root, with Python installed:
+
+```powershell
 cd administration/Admin-Site-Web
 python -m http.server 8080 --directory public
-~~~
+```
 
-افتح http://localhost:8080. الموقع ثابت ولا يحتاج npm build. تسجيل الدخول والبيانات يحتاجان إعداد Firebase وحساباً مخولاً.
+Open **http://localhost:8080**. The site is static; no npm build step is needed. Authentication and data access still require Firebase configuration and an authorized account.
 
-## دليل القراءة
+### 03 · Firebase & server functions
 
-- [شرح البنية ودور الملفات](docs/ARCHITECTURE.md)
-- [متطلبات التشغيل والبناء والنشر](docs/SETUP.md)
-- [الخدمات الخارجية وحدود الحزمة](docs/EXTERNAL-SERVICES.md)
-- [ما تم التحقق منه](docs/VERIFICATION.md)
-- [فهرس كل الملفات](FILE_INDEX.md)
+The Android client configuration is in `app/google-services.json`; the web configuration is in `public/firebase-config.js`. When using a different Firebase project, update both and the Hosting project binding. Configure Google sign-in, authorized domains, Android signing fingerprints and Firestore roles.
 
-## ما تتضمنه النسخة
+Using Node.js 22 and pnpm, from the repository root:
 
-كود المصدر، الصور والفيديوهات اللازمة، الاختبارات، إعدادات البناء، Gradle Wrapper وملف قفل مكتبات وظائف الخادم. المكتبات المثبتة والكاش ومخرجات البناء والنسخ القديمة والإعدادات المحلية مستثناة؛ يعاد تنزيل التبعيات عند تجهيز بيئة التطوير.
+```powershell
+cd application/AbdallahGuennoun/firebase/functions
+pnpm install --frozen-lockfile
+pnpm test
+```
 
-إعدادات Firebase الخاصة بالعميل محفوظة كما كانت. الحزمة لا تنسخ الحسابات أو بيانات التلاميذ السحابية، ولا توفر خادم رفع الصور أو مفاتيح التوقيع. حالة الخدمات المنشورة لم تُفحص أثناء ترتيب الملفات.
+Publishing the source does not deploy Firebase services or copy cloud data. See the [setup guide (Arabic)](docs/SETUP.md) for Hosting, Firestore and functions deployment commands.
 
-## الحقوق
+## 📚 Documentation
 
-لم يُضف ترخيص جديد لهذا المشروع. راجع [إشعارات الطرف الثالث](application/AbdallahGuennoun/THIRD_PARTY_NOTICES.md)، وارجع إلى مالك المشروع بخصوص إعادة الاستخدام والنشر.
+| Guide | What you will find |
+| :--- | :--- |
+| [العربية — Arabic README](README.ar.md) | A complete Arabic version of this introduction |
+| [Architecture](docs/ARCHITECTURE.md) · Arabic | Components, key files and data flow |
+| [Setup](docs/SETUP.md) · Arabic | Environment, builds, tests and deployment |
+| [External services](docs/EXTERNAL-SERVICES.md) · Arabic | Dependencies outside this source package |
+| [Verification](docs/VERIFICATION.md) · Arabic | Packaging checks and testing limitations |
+| [File index](FILE_INDEX.md) · Arabic | Every included file and its role |
+
+<details>
+<summary><strong>Package contents, service status & rights</strong></summary>
+
+Source, original media assets, tests, Gradle Wrapper and dependency declarations are included. Generated builds, installed dependencies, caches, local SDK settings and backup files are excluded.
+
+Cloud accounts and student data are not bundled. Client Firebase configuration is retained; it is not an administrative service-account credential. The media upload server and private signing keys are not included. Earlier project notes reported a Firebase billing-plan requirement for deploying notification functions; live deployment status has not been rechecked during packaging.
+
+No new license has been added. Ask the project owner about reuse and distribution, and retain the [third-party notices](application/AbdallahGuennoun/THIRD_PARTY_NOTICES.md).
+
+</details>
+
+---
+
+<p align="center"><strong>Built by RTION · Otman Elabouze</strong><br><sub>Abdallah Guennoun High School · El Qliâa</sub><br><a href="README.ar.md">اقرأ بالعربية ←</a></p>

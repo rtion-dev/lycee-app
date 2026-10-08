@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-label="Lycée App — a closer connection to school">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#081522"/><stop offset="1" stop-color="#17334d"/></linearGradient><linearGradient id="blue"><stop stop-color="#80d6ff"/><stop offset="1" stop-color="#4b8bdf"/></linearGradient><pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#9ec3db" stroke-opacity=".045"/></pattern></defs>
+<rect width="1200" height="440" rx="24" fill="url(#bg)"/><rect width="1200" height="440" rx="24" fill="url(#grid)"/>
+<circle cx="1090" cy="-10" r="260" fill="#326398" opacity=".12"/><circle cx="1090" cy="-10" r="198" fill="none" stroke="#83b9e3" stroke-opacity=".13"/>
+<path d="M48 54H104" stroke="#ceb990" stroke-width="4" stroke-linecap="round"/>
+<g font-family="Segoe UI,Arial,sans-serif">
+<text x="48" y="93" fill="#a4c1d7" font-size="13" letter-spacing="3">ABDALLAH GUENNOUN HIGH SCHOOL</text>
+<text x="48" y="168" fill="#f4f8ff" font-size="64" font-weight="750" letter-spacing="-2">LYCÉE APP<tspan fill="#83cfff">.</tspan></text>
+<text x="50" y="218" fill="#c4d9e9" font-size="27">A closer connection to school.</text><text x="50" y="253" fill="#8faac1" font-size="18">Updates, timetables and document requests.</text>
+<g font-size="12" font-weight="700" letter-spacing="1"><rect x="48" y="302" width="116" height="34" rx="17" fill="#203f54"/><text x="106" y="324" text-anchor="middle" fill="#93deed">ANDROID</text><rect x="176" y="302" width="126" height="34" rx="17" fill="#253651"/><text x="239" y="324" text-anchor="middle" fill="#b8c6ff">ADMIN WEB</text><rect x="314" y="302" width="118" height="34" rx="17" fill="#393c3f"/><text x="373" y="324" text-anchor="middle" fill="#efd5a0">FIREBASE</text></g>
+<text x="50" y="394" fill="#6f8ba2" font-size="12" letter-spacing="2">BUILT BY RTION  /  VERSION 2.0</text>
+</g>
+<g transform="translate(744 75)">
+<rect x="70" y="23" width="282" height="215" rx="15" fill="#0b1c2d" stroke="#416080"/><path d="M70 60H352" stroke="#314c66"/><circle cx="88" cy="42" r="4" fill="#c4ae87"/><circle cx="102" cy="42" r="4" fill="#597c9c"/><circle cx="116" cy="42" r="4" fill="#597c9c"/>
+<rect x="90" y="80" width="67" height="139" rx="5" fill="#142f46"/><path d="M102 99H145M102 117H137M102 135H142" stroke="#527793" stroke-width="4" stroke-linecap="round"/>
+<rect x="174" y="82" width="155" height="50" rx="7" fill="#223f58"/><path d="M189 100H246M189 115H280" stroke="#75acd4" stroke-width="5" stroke-linecap="round"/>
+<rect x="174" y="145" width="71" height="72" rx="7" fill="#1b344c"/><rect x="256" y="145" width="73" height="72" rx="7" fill="#1b344c"/><path d="M186 200V182M199 200V171M212 200V188M225 200V165" stroke="#7ecaf3" stroke-width="5" stroke-linecap="round"/><path d="M270 177L284 191L313 165" stroke="#c9b690" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="-16" y="99" width="124" height="206" rx="22" fill="#091724" stroke="#6994b5" stroke-width="2"/><rect x="-5" y="113" width="102" height="177" rx="14" fill="#17344c"/><rect x="24" y="118" width="43" height="7" rx="4" fill="#091724"/>
+<path d="M10 164L46 147L82 164L46 181Z" fill="url(#blue)"/><path d="M22 174V186Q46 203 70 186V174" fill="none" stroke="#a1d9fa" stroke-width="3"/>
+<rect x="10" y="215" width="71" height="6" rx="3" fill="#83bbde"/><rect x="10" y="230" width="53" height="5" rx="2" fill="#4d7393"/><rect x="10" y="251" width="32" height="22" rx="5" fill="#294c66"/><rect x="49" y="251" width="32" height="22" rx="5" fill="#294c66"/>
+<circle cx="302" cy="283" r="27" fill="#142d41" stroke="#52627a"/><path d="M294 294L292 274L301 281L307 269L314 293Z" fill="#e6ba68"/>
+<path d="M126 271H241Q259 271 266 281" fill="none" stroke="#537fa2" stroke-width="2" stroke-dasharray="5 5"/>
+</g></svg>

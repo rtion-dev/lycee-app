@@ -1,0 +1,7 @@
+(()=>{
+let mode;try{mode=localStorage.getItem('admin-theme')}catch{}const system=matchMedia('(prefers-color-scheme: dark)');
+function apply(){const dark=mode?mode==='dark':system.matches;document.documentElement.dataset.theme=dark?'dark':'light';document.querySelectorAll('[data-school-logo]').forEach(img=>img.src=dark?'logo_dark.png':'logo_light.png');const b=document.getElementById('theme');if(b){b.textContent=dark?'☀ الوضع الفاتح':'☾ الوضع المظلم';b.setAttribute('aria-pressed',String(dark));} }
+apply();system.addEventListener('change',apply);
+document.addEventListener('DOMContentLoaded',()=>{apply();const b=document.getElementById('theme');if(b)b.onclick=()=>{mode=document.documentElement.dataset.theme==='dark'?'light':'dark';try{localStorage.setItem('admin-theme',mode)}catch{}apply();};});
+window.schoolError=e=>{const c=e?.code||'';if(c.includes('permission-denied'))return 'تم تسجيل الدخول، لكن الوصول إلى هذه الخدمة غير متاح لحسابك. على المدير التحقق من صلاحيتك وإعدادات الخدمة.';if(c.includes('unauthorized-domain'))return 'تسجيل الدخول غير مفعّل على هذا العنوان بعد. تواصل مع إدارة الموقع.';if(c.includes('popup-closed')||c.includes('cancelled-popup'))return 'تم إلغاء تسجيل الدخول. يمكنك المحاولة عندما تكون مستعداً.';if(c.includes('popup-blocked'))return 'المتصفح منع نافذة Google. اسمح بالنوافذ المنبثقة لهذا الموقع ثم حاول مجدداً.';if(c.includes('network')||c.includes('unavailable'))return 'تعذر الاتصال بالخدمة. تحقق من الإنترنت ثم أعد المحاولة.';return 'تعذّر إتمام العملية. أعد المحاولة؛ إذا استمر المشكل تواصل مع الإدارة.';};
+})();

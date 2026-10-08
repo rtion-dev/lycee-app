@@ -1,0 +1,32 @@
+# Generated files and installed dependencies
+**/build/
+**/.gradle/
+**/.kotlin/
+**/node_modules/
+**/.firebase/
+**/.cxx/
+**/.externalNativeBuild/
+**/.idea/
+*.iml
+.DS_Store
+Thumbs.db
+# Local configuration and private credentials
+local.properties
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.pem
+*.p12
+*service-account*.json
+*serviceAccount*.json
+firebase-adminsdk*.json
+# Backups, logs and distribution binaries
+backups/
+*.bak
+*.tmp
+*.log
+*.apk
+*.aab
+# Keep Gradle wrapper, dependency declarations and lockfiles in Git.
